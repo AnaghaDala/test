@@ -6,8 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useCookies } from 'react-cookie'; 
 
 function Complaint({ show, onHide }) {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [complaintText, setComplaintText] = useState('');
   const [photo, setPhoto] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -15,12 +14,8 @@ function Complaint({ show, onHide }) {
   const [cookies] = useCookies(['authToken']);
   const authToken = cookies.authToken;
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+  const handleComplaintTextChange = (e) => {
+    setComplaintText(e.target.value);
   };
 
   const handlePhotoChange = (e) => {
@@ -36,8 +31,7 @@ function Complaint({ show, onHide }) {
 
     // Create a FormData object to send data to the server
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('description', description);
+    formData.append('complaintText', complaintText);
     formData.append('photo', photo);
     formData.append('date', selectedDate);
   
@@ -72,23 +66,11 @@ function Complaint({ show, onHide }) {
           <label htmlFor="name" className="form-label">
             Complaint:
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            value={name}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description of Grievance:
-          </label>
           <textarea
             className="form-control"
             id="description"
-            value={description}
-            onChange={handleDescriptionChange}
+            value={complaintText}
+            onChange={handleComplaintTextChange}
           ></textarea>
         </div>
         <div className="mb-3">
@@ -105,7 +87,7 @@ function Complaint({ show, onHide }) {
         </div>
         <div className="mb-3">
           <label htmlFor="photo" className="form-label">
-            Upload Photo:
+            Upload File:
           </label>
           <input
             type="file"

@@ -4,7 +4,7 @@ const geocode = require('../util/geocode');
 // Controller function to register a new complaint
 exports.registerComplaint = async (req, res) => {
   try {
-    const { name, description, date } = req.body;
+    const { complaintText, date } = req.body;
     const userId = req.user._id;
     const photo = req.file.path
 
@@ -15,7 +15,7 @@ exports.registerComplaint = async (req, res) => {
 
     await Complaint.create({
       user: userId,
-      description,
+      complaintText,
       location, // Include location if it's available
       date, // Automatically set the current date
       attachment: photo

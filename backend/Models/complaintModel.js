@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ComplaintSchema = new mongoose.Schema({
-  description: {
+  complaintText: {
     type: String,
     required: true,
   },
